@@ -2,6 +2,8 @@ const Joi = require("joi")
 
 const schema = Joi.object({
     name: Joi.string().min(2).required(),
+    category: Joi.string().min(2).required(),
+    shop: Joi.string().min(2).required(),
     description: Joi.string().min(50).required(),
     in_stock : Joi.number(),
     ptype: Joi.string(),

@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 
 const workerSchema = new mongoose.Schema({
     user : {type: mongoose.Schema.Types.ObjectId,  ref:"User"},
+    created_by : {type: mongoose.Schema.Types.ObjectId,  ref:"User"},
     shop : {type: mongoose.Schema.Types.ObjectId,  ref:"Shop"},
     role: String,
     createWorkerPrevilege: Boolean,

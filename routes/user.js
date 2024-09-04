@@ -17,14 +17,15 @@ router.post('/', async (req, res) => {
       let data = req.body;
       let error = validateUser(data, res);
       if (error) return
-      let user = User.findOne({email: data.email})
+      let user = await User.findOne({email: data.email})
+      // console.log(user)
       if (user){
         res.status(400).json({message:"User already exist."})
         return
       }
 
 
-      user = new User(_.pick(req.body, ['name', 'email', 'password']));
+      user = new User(req.body);
       // encrypt user password
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(user.password, salt);
@@ -32,7 +33,7 @@ router.post('/', async (req, res) => {
       
     //   const newUser = new User(user);
     //   const savedUser = await newUser.save();
-      res.status(201).json(savedUser);
+      res.status(201).json((_.pick(user, ['_id', 'first_name', 'email'])));
     } catch (error) {
       res.status(400).json({ message: error.message });
     }

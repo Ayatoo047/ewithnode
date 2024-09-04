@@ -7,7 +7,8 @@ const shopSchema = new mongoose.Schema({
     address : String,
     email : String,
     phone_one: String,
-    phone_two: String
+    phone_two: String,
+    workers : [{type: mongoose.Schema.Types.ObjectId, ref:"Worker"}]
 })
 
 const Shop = mongoose.model('Shop', shopSchema);
